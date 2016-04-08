@@ -1,0 +1,87 @@
+<html>
+<head>
+<TITLE>LEAVE APPLICATION</TITLE>
+</head>
+{%load staticfiles%}
+<body background="{%static '1.jpg' %}">
+{% for i in myinfo %} 
+{% if i.branch == 1 %}
+<h1> BRANCH :-
+Comp<br>
+{% endif %}
+</h1>
+<h1> 
+{% if i.branch == 2 %}
+BRANCH :-
+IT<br>
+{% endif %}
+</h1>
+<h1> 
+{% if i.branch == 3 %}
+BRANCH :-
+ENTC<br>
+{% endif %}
+</h1>
+<h1> CONTACT NO:-
+{{ i.mob_no }}<br>
+</h1>
+<h1>USER ID:-
+{{i.user.username}}<br>
+</h1>
+<h1> NAME :-
+{{i.user.first_name}} 
+{{i.user.last_name}}<br>
+<br>	
+EMAILID :-{{i.user.email}}<br>
+</h1>
+{% if i.leaves_left == 0%}
+<p>No leaves left! Sorry</p>
+{% endif %}
+<!--{% if i.leaves_left != 0 %}-->
+<form action="/apply/" method="post">
+	<h1>
+		Date from : <input type="date" name="datefrom"><br>
+	</h1>
+	<h1>
+		Till Date : <input type="date" name="dateto"><br>
+	</h1>
+	<h1>
+		Reason : <textarea name="why" cols="50" rows="5" ></textarea> </br>
+	</h1>
+	<h1>
+		Substitute : <textarea name="prox" cols="30" rows="3"></textarea></br>
+	</h1>
+	<h1>
+		Types of Leaves :-
+		<select>
+  		<option value="ml">MEDICAL LEAVE</option>
+  		<option value="cl">CASUAL LEAVE</option>
+  		<option value="cml">COMPLIMENTRY LEAVE</option>
+  		<option value="ol">ON-DUTY LEAVE</option>
+		</select> 
+	</h1>
+	<input type="submit" id="Submit" value="SUBMIT"  style="height:50px; width:200px" />
+</form>
+<form action="/update/" method="post">	
+	<input type="submit" id="update" value="UPDATE_PROFILE"  style="height:50px; width:200px" />
+</form>
+{% endif %}
+{% endfor %}
+<br>
+<h1>MY APPLICATIONS</h1>
+{% for i in myapps %}
+<h1>DATE FROM :-
+{{i.datefrom}}<br>
+TILL DATE :-
+{{i.dateto}}
+</h1>
+<h1>	
+{% if i.status == 0 %}Status: Pending{% endif %}<br>
+{% if i.status == 1 %}Status: Accepted{% endif %}<br>
+{% if i.status == 2 %}Status: Rejected{% endif %}<br>
+</h1>
+<p>**************</p><br>
+{% endfor %}
+<h1><a href="/logout/" >Logout</a></h1>
+</body>
+</html>

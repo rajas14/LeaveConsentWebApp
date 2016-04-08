@@ -1,0 +1,53 @@
+<html>
+{%load staticfiles%}
+<body background="{%static '12.jpg' %}">
+{% for i in myinfo %}
+{% if i.branch == 1 %}
+<h1> BRANCH :-
+Comp<br>
+{% endif %}
+</h1>
+<h1> 
+{% if i.branch == 2 %}
+BRANCH :-
+IT<br>
+{% endif %}
+</h1>
+<h1> 
+{% if i.branch == 3 %}
+BRANCH :-
+ENTC<br>
+{% endif %}
+</h1>
+<h1> CONTACT NO:-
+{{ i.mob_no }}<br>
+</h1>
+<h1>USER ID:-
+{{i.user.username}}<br>
+</h1>
+<h1> NAME :-
+{{i.user.first_name}} 
+{{i.user.last_name}}<br>
+<br>
+EMAIL ID :-{{i.user.email}}<br>
+</h1>{% endfor %}
+<br>
+<p><h1>
+Applications:</p>
+{% for i in applications %}
+<h1>
+Teacher : {{ i.user.first_name }} 
+{{i.user.last_name}}<br>
+Duration of Leave: {{ i.datefrom }} To {{i.dateto}}<br>
+Reason for Leave : {{i.reason}}<br>
+Substitute suggested : {{i.proxy}}<br>
+</h1>
+<h1>
+<a href="/accept/{{ i.id }}">Accept</a><br>
+<a href="/decline/{{ i.id }}">Decline</a><br>
+{{i.status}}<br>
+</h1>
+{% endfor %}<br>
+<h1><a href="/logout/" >Logout</a></h1>
+</body>
+</html>
